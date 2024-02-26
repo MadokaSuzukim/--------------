@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#app {
+    width:  auto;
+    margin: auto;
+    padding-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+}
+
+/* 背景を朝と夜で変える */
+.morning {
+    background-image: url('img/morning.png'); /* 画像のパスを正確に指定 */
+    background-size: cover;
+}
+
+.night {
+    background-image: url('img/night.png'); /* 画像のパスを正確に指定 */
+    background-size: cover;
+}
