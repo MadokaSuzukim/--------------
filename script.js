@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadMorningRoutine();
 
-    saveBtn.addEventListener('click', () => {
-        const today = new Date().toLocaleDateString('ja-JP');
-        const reflectionText = reflection.value;
-        saveDailyReflection(today, reflectionText);
-        alert('振り返りを保存しました');
-    });
+    // saveBtn.addEventListener('click', () => {
+    //     const today = new Date().toLocaleDateString('ja-JP');
+    //     const reflectionText = reflection.value;
+    //     saveDailyReflection(today, reflectionText);
+    //     alert('振り返りを保存しました');
+    // });
 
     $("main").slideDown(500);
 
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // <<<<<<< HEAD
     // 反省を保存
-    saveBtn.addEventListener('click', () => {
+    // saveBtn.addEventListener('click', () => {
 // =======
     // 今日の行動計画を保存
     // saveBtn.addEventListener('click', () => {
@@ -308,8 +308,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const v = localStorage.getItem("memo");
         $("#textarea").val(v);
     }
-// <<<<<<< HEAD
-});
 
 // 夜になったら「おかえり」メッセージを表示
 function showWelcomeBackMessage() {
@@ -647,13 +645,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveBtn = document.getElementById('save-reflection');
     const reflection = document.getElementById('reflection');
 
-    // 今日の行動計画を保存
-    saveBtn.addEventListener('click', () => {
-        const today = new Date().toLocaleDateString('ja-JP');
-        const reflectionText = reflection.value;
-        saveDailyReflection(today, reflectionText); // 保存する関数を呼び出す
-        alert('振り返りを保存しました');
-    });
+    // // 今日の行動計画を保存
+    // saveBtn.addEventListener('click', () => {
+    //     const today = new Date().toLocaleDateString('ja-JP');
+    //     const reflectionText = reflection.value;
+    //     saveDailyReflection(today, reflectionText); // 保存する関数を呼び出す
+    //     alert('振り返りを保存しました');
+    // });
 
     // カレンダーで日付が選択されたときの処理
     function onDateSelected(date) {
