@@ -1,6 +1,60 @@
 body {
     font-family: Arial, sans-serif;
 }
+<<<<<<< HEAD
+=======
+#mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* ビューポートの高さに合わせる */
+    text-align: center; /* テキストも中央揃えに */
+}
+
+.checkbox-container {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin: 5px;
+}
+
+.checkbox-container input[type="checkbox"],
+.checkbox-container label {
+    margin: 0 5px;
+}
+
+
+
+/* styles.css */
+h1 {
+    text-align: center;
+}
+h2 {
+    text-align: center;
+}
+/* 親コンテナのスタイル */
+#checkboxContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;/* アイテムを中央揃えにする */
+    justify-content: center;/* アイテムをコンテナの開始位置から配置する */
+}
+
+/* 各チェックボックスを含むコンテナのスタイル */
+.checkbox-container {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin: 5px; /* 適宜調整 */
+}
+
+.checkbox-container input[type="checkbox"],
+.checkbox-container label {
+    margin: 0 5px; /* チェックボックスとラベルの間隔を適宜調整 */
+}
+
+>>>>>>> 08f97f0 (main)
 
 #app {
     width:  auto;
@@ -23,3 +77,47 @@ textarea {
     background-image: url('img/night.png'); /* 画像のパスを正確に指定 */
     background-size: cover;
 }
+<<<<<<< HEAD
+=======
+
+/* 複数の単語や要素に対して説明書きを設定 */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* ツールチップがあることを示すための下線 */
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* ツールチップの位置設定 */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    
+    /* ツールチップ表示時のアニメーション */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+
+  #timer {
+    font-size: 48px; /* フォントサイズを大きくします */
+    color: #333; /* 文字色を設定します */
+    text-align: center; /* テキストを中央揃えにします */
+    margin-top: 0; /* ビューポートの高さに基づいて、上部の余白を設定します */
+}
+>>>>>>> 08f97f0 (main)

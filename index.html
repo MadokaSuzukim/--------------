@@ -2,10 +2,41 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
+=======
+    <title>アウトプットメモアプリ</title>
+        <!-- /* CSS スタイルはここに追加 */ -->
+        <!-- /* CSSリンク */ -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calendar {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .calendar th, .calendar td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .calendar th {
+            background-color: #f2f2f2;
+        }
+        .calendar td:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    </style>
+    
+    <!-- jQueryのスクリプト -->
+    <script src="js/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+>>>>>>> 08f97f0 (main)
     <div id="app">
         <h1>毎日のアウトプットメモアプリ</h1>
         <h2>-環境設定もできるよ-</h2>
         <h2>マイダンジョンを攻略し、生きやすさを手に入れよう！</h2>
+<<<<<<< HEAD
     <link rel="stylesheet" href="style.css">
     <script src="js/jquery-2.1.3.min.js"></script>
 </head>
@@ -60,6 +91,107 @@
 
  
 
+=======
+    </div>
+    
+    <!-- 語録表示エリア
+<div id="quote"></div> -->
+    <div id="timer">03:00</div>
+
+    <main>
+        <div>今日の行動計画</div>
+        <textarea id="textarea"></textarea>
+        <!-- 一括操作ボタン -->
+        <button id="action-btn">編集/保存/削除</button>
+    </main>
+
+    <!-- <div id="app"> -->
+    <!-- 朝の習慣をチェックリスト形式で管理し、標準の習慣を予め記載しておきながら、ユーザーが自由に項目を追加できる機能を実装する -->
+        <h2>成功に近づく習慣</h2>
+        <div id="morning-routine">
+            <div id="routineList">
+                <div class="centered-container">
+                    <h2>朝の習慣チェックリスト</h2>
+                    <div id="checkboxContainer">
+
+                        <div class="checkbox-container">
+                          <input type="checkbox" id="hotWater" name="routine" value="白湯を飲む">
+                          <label for="hotWater">白湯を飲む</label>
+                        </div>
+                        <div class="checkbox-container">
+                          <input type="checkbox" id="hotWater" name="routine" value="瞑想">
+                          <label for="hotWater">瞑想</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="hotWater" name="routine" value="ストレッチ">
+                            <label for="hotWater">ストレッチ</label>
+                          </div>
+                          <div class="checkbox-container">
+                            <input type="checkbox" id="hotWater" name="routine" value="瞑想">
+                            <label for="hotWater">オイルプティング</label>
+                          </div>
+                          <div class="checkbox-container">
+                        <input type="checkbox" id="habitRecognition" name="routine" value="成功を遠ざける習慣を認識する">
+                        <label for="habitRecognition">成功に遠ざける習慣を認識する</label>
+                    </div>
+                    <input type="text" id="newRoutineInput" placeholder="新しい習慣を追加">
+                    <button id="addRoutineBtn">追加</button>
+                </div>
+            </div>
+            <!-- JavaScriptで動的にリストを生成 -->
+        </div>
+       
+
+        <!-- おかえりメッセージのコンテナ -->
+        <h2>今日1日の振り返り</h2>
+<div id="welcome-back-message" style="display:none;">
+    <h1>おかえりなさい！今日はどんな１日だった？目的を意識して過ごせたかな？</h1>
+    <button id="yes-button">頑張ったよ</button>
+</div>
+        <!-- 振り返りメッセージエリアを追加 -->
+        <textarea id="reflection"></textarea>
+    </div>
+    
+<!-- 環境設定フォーム -->
+<div id="settings-form">
+    <label for="setting-input">環境設定:</label>
+    <input type="text" id="setting-input" name="setting-input">
+</div>
+
+<!-- マスコット表示 -->
+<div id="mascot">
+    <img src="img/1.png" alt="マスコット" id="mascotImage">
+</div>
+
+<!-- 環境設定フォーム
+<div id="settings-form">
+    <h2>環境設定を記入すると、語録が出てくるよ🎶</h2>
+    <label for="setting-input">環境設定:</label>
+    <input type="text" id="setting-input" name="setting-input">
+    <button id="save-settings">保存</button>
+</div> -->
+
+<!-- 振り返りHTML (ユーザーインターフェース) -->
+<label for="datePicker">データを見る日付を選択：</label>
+<input type="date" id="datePicker" name="datePicker">
+
+
+<button id="loadDataButton">データをロード</button>
+<div id="dataDisplay"></div>
+
+<h1>用語集</h1>
+<p>
+    <span class="tooltip">環境設定<span class="tooltiptext">環境設定はやりたい事をやれないそれをエネルギー使わずにする方法を考えること。</span></span>、
+    <span class="tooltip">メタ認知<span class="tooltiptext">自分が認知（考えている・感じている）していることを客観的に把握すること</span></span>
+  </p>
+<!-- モーダルウィンドウ -->
+<div id="congratulationModal" style="display:none;">
+    <p>おめでとう！マスコットが成長したよ！</p>
+    <button id="closeModal">閉じる</button>
+  </div>
+  <!-- カレンダーのコンテナ -->
+  <div id="calendar-container"></div>
+>>>>>>> 08f97f0 (main)
     <footer>
         <small>Marumark</small>
     </footer>
