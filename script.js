@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-=======
+// <<<<<<< HEAD
+// =======
 document.addEventListener('DOMContentLoaded', () => {
     const addBtn = document.getElementById('add-item');
     const saveBtn = document.getElementById('save-reflection');
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
->>>>>>> 08f97f0 (main)
+// >>>>>>> 08f97f0 (main)
 
 document.addEventListener('DOMContentLoaded', () => {
     const addBtn = document.getElementById('add-item');
@@ -270,13 +270,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
     });
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
     // 反省を保存
     saveBtn.addEventListener('click', () => {
-=======
+// =======
     // 今日の行動計画を保存
     // saveBtn.addEventListener('click', () => {
->>>>>>> 08f97f0 (main)
+// >>>>>>> 08f97f0 (main)
         const today = new Date().toLocaleDateString('ja-JP'); // 日本の日付形式で取得
         const reflectionWithDate = {
             date: today,
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const v = localStorage.getItem("memo");
         $("#textarea").val(v);
     }
-<<<<<<< HEAD
+// <<<<<<< HEAD
 });
 
 // 夜になったら「おかえり」メッセージを表示
@@ -326,7 +326,7 @@ function showWelcomeBackMessage() {
         });
     }
 }
-=======
+// =======
 // });
 
 function checkAndShowWelcomeBackMessage() {
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', checkAndShowWelcomeBackMessage);
 
 
 
->>>>>>> 08f97f0 (main)
+// >>>>>>> 08f97f0 (main)
  // 背景を朝と夜とで変える
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
@@ -400,7 +400,7 @@ function showRandomQuote() {
     const quote = getRandomQuote();
     alert(quote); // カスタムポップアップに置き換えることも可能
 }
-<<<<<<< HEAD
+// <<<<<<< HEAD
 
 // 保存ボタンクリック時のイベントハンドラを設定
 document.getElementById('save-settings').addEventListener('click', () => {
@@ -414,7 +414,7 @@ document.getElementById('save-settings').addEventListener('click', () => {
 // タイマー
 document.addEventListener('DOMContentLoaded', function() {
     var timeLeft = 3 * 60; // 5分を秒単位で計算
-=======
+// =======
     // 語録ポップアップを表示
     showRandomQuote();
 // });
@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // タイマー
 document.addEventListener('DOMContentLoaded', function() {
     var timeLeft = 3 * 60; // 3分を秒単位で計算
->>>>>>> 08f97f0 (main)
+// >>>>>>> 08f97f0 (main)
     var timerElement = document.getElementById('timer');
 
     var timerId = setInterval(function() {
@@ -443,9 +443,9 @@ document.addEventListener('DOMContentLoaded', function() {
             timeLeft -= 1;
         }
     }, 1000); // 1秒ごとに更新
-<<<<<<< HEAD
+// <<<<<<< HEAD
 });
-=======
+// =======
 });
 
 // // データを保存する関数
@@ -888,4 +888,4 @@ calendarContainer.appendChild(createCalendar(currentYear, currentMonth));
 
 // // カレンダーを作成してコンテナに追加
 // calendarContainer.appendChild(createCalendar(currentYear, currentMonth));
->>>>>>> 08f97f0 (main)
+// >>>>>>> 08f97f0 (main)
