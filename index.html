@@ -31,6 +31,18 @@
     </header>
     <main>
         <h1>リラックスできてる？1分間深呼吸してみて</h1>
+        <div id="muteButtonContainer">
+            <!-- mute切り替えボタン -->
+            <button id="muteButton" onclick="toggleMute()">音を消す / 音を出す</button>
+        </div>
+        
+        <div id="popup" style="display: none;">
+            <p id="quoteText"></p>
+            <button id="closePopupButton" onclick="closePopup()">閉じる</button>
+        </div>
+        
+        <audio id="backgroundMusic" src="backmusic.m4a"></audio>
+    
         <div id="timer"></div>
         <main id="actionPlanSection">
             <div>行動計画を立てましょう</div>

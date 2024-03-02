@@ -135,36 +135,6 @@
     }, 1000); // 1秒ごとに更新
 });
 
-// 語録の配列を初期化
-const quotes = [
-    "一口サイズでいいんやで",
-    "すーさんの今日１日語録"+"毎日の積み重ねやで。ほなやろか",
-    "継続した事だけが身につくんやで",
-    "あれ？そこまで進んでるん！？",
-    "頑張るってどういう事なんやろうね〜",
-    "お前さんはお前さんよ。",
-    "今日もいい日やったかい？一歩ずつ一歩ずつ",
-    "気づいたら早いでよ。選択肢は狭ければ 狭いほどいいんやで",
-    "すーさんの今日１日語録"+"どう生きるかなんて、皆ちゃうからなー",
-    "いらん努力してないやろか？",
-    "おおきに！見とるからなー",
-    "出来ひんかった後悔せんと、明日どう動くか考えよ。",
-    // 他の語録をここに追加
-];
-// ランダムに語録を選ぶ関数
-function getRandomQuote() {
-    const index = Math.floor(Math.random() * quotes.length);
-    return quotes[index];
-}
-// 語録をポップアップ表示する関数
-function showRandomQuote() {
-    const quote = getRandomQuote();
-    alert(quote); // カスタムポップアップに置き換えることも可能
-}
-// 例として関数を実行
-showRandomQuote();
-
-
 // 振り返り
 $(document).ready(function() {
     showWelcomeBackMessage();
@@ -249,56 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-
-// マスコット
-function updateMascotState() {
-    const mascotImage = document.getElementById('mascotImage');
-    const states = ['img/1.png', 'img/2.png', 'img/3.png','img/4.png','img/5.png','img/6.png','img/7.png'];
-    let currentState = states.indexOf(mascotImage.src.split('/').pop());
-
-    currentState = (currentState + 1) % states.length;
-    mascotImage.src = states[currentState];
-}
-
-function updateProgress() {
-    progress++;
-    if (progress >= totalItems) {
-        currentStage++;
-        updateMascotState();
-        showCongratulationModal();
-    }
-}
-function updateMascotState() {
-    // 進捗に応じてマスコットの状態を更新するロジックをここに実装
-    // 例として、単純な状態変化を実装
-    const mascotImage = document.getElementById('mascotImage');
-    const states = ['img/1.png', 'img/2.png', 'img/3.png','img/4.png','img/5.png','img/6.png','img/7.png'];
-    let currentState = states.indexOf(mascotImage.src.split('/').pop());
-
-    currentState = (currentState + 1) % states.length; // 次の状態へ
-    mascotImage.src = states[currentState]; // 画像を更新
-}
-
-// 全ての項目に答えるとマスコットが成長する機能と、成長段階が上がるたびにモーダルウィンドウでお祝いメッセージを表示する機能
-let progress = 0; // ユーザーの進捗状況（例：0から100までのパーセンテージ）
-const totalItems = 4; // 答えるべき項目の総数
-let currentStage = 0; // マスコットの現在の成長段階
-
-// 進捗を更新する関数（項目に答えるたびに呼び出す）
-function updateProgress() {
-  progress++; // 進捗を更新
-  if (progress >= totalItems) {
-    // 全ての項目に答えたら
-    currentStage++; // マスコットの成長段階を上げる
-    updateMascotState(); // マスコットの状態を更新
-    showCongratulationModal(); // お祝いのモーダルウィンドウを表示
-  }
-}
-// マスコットの状態を更新する関数（成長段階に応じて）
-function updateMascotState() {
-    // 成長段階に応じてマスコットの画像や状態を更新するロジックをここに実装
-  }
-
 
 // チェックリスト
 document.addEventListener('DOMContentLoaded', function() {
@@ -388,3 +308,120 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('選択した習慣を保存しました');
     }
 });
+
+// マスコット
+function updateMascotState() {
+    const mascotImage = document.getElementById('mascotImage');
+    const states = ['img/1.png', 'img/2.png', 'img/3.png','img/4.png','img/5.png','img/6.png','img/7.png'];
+    let currentState = states.indexOf(mascotImage.src.split('/').pop());
+
+    currentState = (currentState + 1) % states.length;
+    mascotImage.src = states[currentState];
+}
+
+function updateProgress() {
+    progress++;
+    if (progress >= totalItems) {
+        currentStage++;
+        updateMascotState();
+        showCongratulationModal();
+    }
+}
+function updateMascotState() {
+    // 進捗に応じてマスコットの状態を更新するロジックをここに実装
+    const mascotImage = document.getElementById('mascotImage');
+    const states = ['img/1.png', 'img/2.png', 'img/3.png','img/4.png','img/5.png','img/6.png','img/7.png'];
+    let currentState = states.indexOf(mascotImage.src.split('/').pop());
+
+    currentState = (currentState + 1) % states.length; // 次の状態へ
+    mascotImage.src = states[currentState]; // 画像を更新
+}
+
+// 全ての項目に答えるとマスコットが成長する機能と、成長段階が上がるたびにモーダルウィンドウでお祝いメッセージを表示する機能
+let progress = 0; // ユーザーの進捗状況（例：0から100までのパーセンテージ）
+const totalItems = 4; // 答えるべき項目の総数
+let currentStage = 0; // マスコットの現在の成長段階
+
+// 進捗を更新する関数（項目に答えるたびに呼び出す）
+function updateProgress() {
+  progress++; // 進捗を更新
+  if (progress >= totalItems) {
+    // 全ての項目に答えたら
+    currentStage++; // マスコットの成長段階を上げる
+    updateMascotState(); // マスコットの状態を更新
+    showCongratulationModal(); // お祝いのモーダルウィンドウを表示
+  }
+}
+// マスコットの状態を更新する関数（成長段階に応じて）
+function updateMascotState() {
+    // 成長段階に応じてマスコットの画像や状態を更新するロジックをここに実装
+  }
+
+// 語録の配列を初期化
+const quotes = [
+    "一口サイズでいいんやで",
+    "すーさんの今日１日語録"+"毎日の積み重ねやで。ほなやろか",
+    "継続した事だけが身につくんやで",
+    "あれ？そこまで進んでるん！？",
+    "頑張るってどういう事なんやろうね〜",
+    "お前さんはお前さんよ。",
+    "今日もいい日やったかい？一歩ずつ一歩ずつ",
+    "気づいたら早いでよ。選択肢は狭ければ 狭いほどいいんやで",
+    "すーさんの今日１日語録"+"どう生きるかなんて、皆ちゃうからなー",
+    "いらん努力してないやろか？",
+    "おおきに！見とるからなー",
+    "出来ひんかった後悔せんと、明日どう動くか考えよ。",
+    // 他の語録をここに追加
+];
+// ランダムに語録を選ぶ関数
+function getRandomQuote() {
+    const index = Math.floor(Math.random() * quotes.length);
+    return quotes[index];
+}
+// 語録をポップアップ表示する関数
+function showRandomQuote() {
+    const quote = getRandomQuote();
+    alert(quote); // カスタムポップアップに置き換えることも可能
+}
+// 例として関数を実行
+showRandomQuote();
+document.getElementById("showQuoteButton").addEventListener("click", showRandomQuote);
+
+// ポップアップを表示する関数
+function showRandomQuote() {
+    const quote = getRandomQuote();
+    alert(quote); // カスタムポップアップに置き換えることも可能
+
+    // OKボタンをクリックしたときに音声を再生
+    document.getElementById("backgroundMusic").play().catch(error => console.error("バックグラウンドミュージックの再生に失敗しました:", error));
+}
+
+// showQuoteButton要素が存在するかを確認してからイベントリスナーを追加
+const showQuoteButton = document.getElementById("showQuoteButton");
+if (showQuoteButton) {
+    showQuoteButton.addEventListener("click", showRandomQuote);
+} else {
+    console.error("showQuoteButtonが存在しません");
+}
+
+// バックグラウンドミュージックを再生する関数
+function playBackgroundMusic() {
+    var backgroundMusic = document.getElementById("backgroundMusic");
+    backgroundMusic.play().catch(error => console.error("バックグラウンドミュージックの再生に失敗しました:", error));
+}
+// ユーザーのクリックに応答して音声を再生する関数
+function playBackgroundMusicOnClick() {
+    playBackgroundMusic();
+}
+
+// ボタンにクリックイベントを追加して音声を再生する
+document.getElementById("playMusicButton").addEventListener("click", playBackgroundMusicOnClick);
+
+
+// ミュート切り替えの関数
+function toggleMute() {
+    var backgroundMusic = document.getElementById("backgroundMusic");
+    backgroundMusic.muted = !backgroundMusic.muted;
+    var muteButton = document.getElementById("muteButton");
+    muteButton.textContent = backgroundMusic.muted ? "音を出す" : "音を消す";
+}
