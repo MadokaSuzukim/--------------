@@ -1,541 +1,273 @@
-// <<<<<<< HEAD
-// =======
-document.addEventListener('DOMContentLoaded', () => {
-    const addBtn = document.getElementById('add-item');
-    const saveBtn = document.getElementById('save-reflection');
-    const reflection = document.getElementById('reflection');
-    let morningRoutine;
-
-    function loadMorningRoutine() {
-        const items = JSON.parse(localStorage.getItem('morningRoutine')) || [];
-        items.forEach(itemText => {
-            addRoutineItem(itemText, false);
-        });
-    }
-
-    morningRoutine = document.getElementById('morning-routine');
-
-    function addRoutineItem(itemText, save = true) {
-        const li = document.createElement('li');
-        li.textContent = itemText;
-        morningRoutine.appendChild(li);
-        if (save) {
-            const items = JSON.parse(localStorage.getItem('morningRoutine')) || [];
-            items.push(itemText);
-            localStorage.setItem('morningRoutine', JSON.stringify(items));
-        }
-    }
-
-    loadMorningRoutine();
-
-    // saveBtn.addEventListener('click', () => {
-    //     const today = new Date().toLocaleDateString('ja-JP');
-    //     const reflectionText = reflection.value;
-    //     saveDailyReflection(today, reflectionText);
-    //     alert('振り返りを保存しました');
-    // });
-
-    $("main").slideDown(500);
-
-    $("#save").on("click", function(){
-        const v = $("#textarea").val();
-        localStorage.setItem("memo", v);
-        alert("保存しました");
-    });
-
-    $("#clear").on("click", function(){
-        localStorage.removeItem("memo");
-        $("#textarea").val("");
-        alert("削除しました");
-    });
-
-    if(localStorage.getItem("memo")){
-        const v = localStorage.getItem("memo");
-        $("#textarea").val(v);
-    }
+    // jQueryを使用してページ読み込み時にアニメーションを表示
+    $(document).ready(function() {
+        $("main").slideDown(500);
     
-    checkAndShowWelcomeBackMessage();
+        // 行動計画のSave クリックイベント
+        $("#saveActionPlan").on("click", function(){
+            const v = $("#actionPlan").val();
+            localStorage.setItem("actionPlan", v);
+            alert("保存しました");
+        });
+    
+        // 行動計画のClear クリックイベント
+        $("#clearActionPlan").on("click", function(){
+            localStorage.removeItem("actionPlan");
+            $("#actionPlan").val("");
+            alert("削除しました");
+        });
+    
+        // 環境設定フォームのSave クリックイベント
+        $("#saveEnvironment").on("click", function(){
+            const v = $("#environment").val();
+            localStorage.setItem("environment", v);
+            alert("保存しました");
+        });
+    
+        // 環境設定フォームのClear クリックイベント
+        $("#clearEnvironment").on("click", function(){
+            localStorage.removeItem("environment");
+            $("#environment").val("");
+            alert("削除しました");
+        });
+    
+        // 振り返りメッセージのSave クリックイベント
+        $("#saveReflection").on("click", function(){
+            const v = $("#reflection").val();
+            localStorage.setItem("reflection", v);
+            alert("保存しました");
+        });
+    
+        // 振り返りメッセージのClear クリックイベント
+        $("#clearReflection").on("click", function(){
+            localStorage.removeItem("reflection");
+            $("#reflection").val("");
+            alert("削除しました");
+        });
+    
+        // ページ読み込み時に行動計画の保存データを表示
+        if(localStorage.getItem("actionPlan")){
+            const v = localStorage.getItem("actionPlan");
+            $("#actionPlan").val(v);
+        }
+    
+        // ページ読み込み時に環境設定フォームの保存データを表示
+        if(localStorage.getItem("environment")){
+            const v = localStorage.getItem("environment");
+            $("#environment").val(v);
+        }
+    
+        // ページ読み込み時に振り返りメッセージの保存データを表示
+        if(localStorage.getItem("reflection")){
+            const v = localStorage.getItem("reflection");
+            $("#reflection").val(v);
+        }
+    });
 
+
+    $(document).ready(function() {
+        $("main").slideDown(500);
+    
+        // Save クリックイベント
+        $(".save-button").on("click", function(){
+            const sectionId = $(this).closest('main').attr('id'); // クリックされたボタンが含まれるセクションのIDを取得
+            const v = $("#" + sectionId + " textarea").val(); // クリックされたボタンが含まれるセクション内のtextareaの値を取得
+            const currentDate = new Date().toLocaleDateString(); // 現在の日付を取得
+            const key = `${sectionId}_${currentDate}`; // 日付情報を含めて一意のキーを作成
+            localStorage.setItem(key, v); // ローカルストレージにデータを保存
+            alert("保存しました");
+        });
+    
+        // Clear クリックイベント
+        $(".clear-button").on("click", function(){
+            const sectionId = $(this).closest('main').attr('id'); // クリックされたボタンが含まれるセクションのIDを取得
+            const currentDate = new Date().toLocaleDateString(); // 現在の日付を取得
+            const key = `${sectionId}_${currentDate}`; // 日付情報を含めた保存されたデータのキーを作成
+            localStorage.removeItem(key); // ローカルストレージからデータを削除
+            $("#" + sectionId + " textarea").val(""); // 対応するtextareaの値をクリア
+            alert("削除しました");
+        });
+    
+        // ページ読み込み時に保存されたデータを表示
+        $("main").each(function() {
+            const sectionId = $(this).attr('id'); // 各セクションのIDを取得
+            const currentDate = new Date().toLocaleDateString(); // 現在の日付を取得
+            const key = `${sectionId}_${currentDate}`; // 日付情報を含めた保存されたデータのキーを作成
+            const savedData = localStorage.getItem(key); // ローカルストレージからデータを取得
+            if(savedData) {
+                $("#" + sectionId + " textarea").val(savedData); // 対応するtextareaにデータを表示
+            }
+        });
+    });
+
+    
+    // 背景画像の編集
+    checkAndShowWelcomeBackMessage();
     const body = document.body;
     const hour = new Date().getHours();
-        
-    if (hour >= 6 && hour < 18) {
+    if (hour >= 6 && hour < 9) {
         body.classList.add('morning');
     } else {
         body.classList.add('night');
+        
     }
 
-    const quote = getRandomQuote();
-    alert(quote);
-
-    var timeLeft = 3 * 60;
+    // タイマー
+    document.addEventListener('DOMContentLoaded', function() {
+    var timeLeft = 60; // 1分を秒単位で計算
     var timerElement = document.getElementById('timer');
 
-    var timerId = setInterval(function() {
+    if (!timerElement) {
+        console.error('タイマー表示用の要素が見つかりません。');
+        return;
+    }
+        var timerId = setInterval(function() {
         var minutes = Math.floor(timeLeft / 60);
         var seconds = timeLeft % 60;
-
         minutes = minutes < 10 ? '0' + minutes : minutes;
         seconds = seconds < 10 ? '0' + seconds : seconds;
-
         timerElement.textContent = `${minutes}:${seconds}`;
-
         if (timeLeft <= 0) {
             clearInterval(timerId);
-            alert('3分が経過しました。自分の時間を楽しんでください！');
+            alert('1分が経過しました。自分の時間を楽しんでください！');
         } else {
             timeLeft -= 1;
         }
-    }, 1000);
-
-    document.getElementById('addRoutineBtn').addEventListener('click', function() {
-        const newRoutine = document.getElementById('newRoutineInput').value;
-        if (newRoutine) {
-            addNewRoutine(newRoutine);
-            document.getElementById('newRoutineInput').value = '';
-        }
-    });
-
-    document.querySelectorAll('.routine-item button').forEach(button => {
-        button.addEventListener('click', function() {
-            const item = this.parentNode;
-            item.parentNode.removeChild(item);
-        });
-    });
-
-    let isEditMode = false;
-
-    function saveOrEditData() {
-        if (isEditMode) {
-            console.log('編集内容を保存');
-        } else {
-            console.log('新規内容を保存');
-        }
-        isEditMode = !isEditMode;
-    }
-
-    function enterEditMode() {
-        isEditMode = true;
-    }
-
-    function updateMascotState() {
-        const mascotImage = document.getElementById('mascotImage');
-        const states = ['img/1.png', 'img/2.png', 'img/3.png','img/4.png','img/5.png','img/6.png','img/7.png'];
-        let currentState = states.indexOf(mascotImage.src.split('/').pop());
-
-        currentState = (currentState + 1) % states.length;
-        mascotImage.src = states[currentState];
-    }
-
-    let progress = 0;
-    const totalItems = 4;
-    let currentStage = 0;
-
-    function updateProgress() {
-        progress++;
-        if (progress >= totalItems) {
-            currentStage++;
-            updateMascotState();
-            showCongratulationModal();
-        }
-    }
-
-    function showCongratulationModal() {
-        document.getElementById('congratulationModal').style.display = 'block';
-    }
-
-    document.getElementById('closeModal').addEventListener('click', function() {
-        document.getElementById('congratulationModal').style.display = 'none';
-    });
-
-    function updateMascotState() {
-    }
-
-    const actionButton = document.getElementById('action-btn');
-    let mode = 'edit';
-
-    actionButton.addEventListener('click', function() {
-        switch(mode) {
-            case 'edit':
-                console.log('編集モードです');
-                mode = 'save';
-                actionButton.textContent = '保存';
-                break;
-            case 'save':
-                console.log('保存モードです');
-                mode = 'delete';
-                actionButton.textContent = '削除';
-                break;
-            case 'delete':
-                const confirmDelete = confirm('本当に削除しますか？');
-                if (confirmDelete) {
-                    console.log('削除処理');
-                }
-                mode = 'edit';
-                actionButton.textContent = '編集';
-                break;
-            default:
-                console.log('不明なモードです');
-                break;
-        }
-    });
-
-    document.getElementById('loadDataButton').addEventListener('click', function() {
-        var myData = localStorage.getItem('myData');
-        if (myData) {
-            document.getElementById('dataDisplay').textContent = myData;
-        } else {
-            document.getElementById('dataDisplay').textContent = 'データが見つかりません。';
-        }
-    });
-
-    const calendarContainer = document.getElementById('calendar-container');
-    calendarContainer.appendChild(createCalendar(currentYear, currentMonth));
-
-    function saveDailyReflection(date, reflection) {
-        localStorage.setItem('dailyReflection_' + date, reflection);
-    }
-
-    function createCalendar(year, month) {
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDayOfWeek = new Date(year, month, 1).getDay();
-        const calendar = document.createElement('table');
-        calendar.className = 'calendar';
-        const header = calendar.createTHead();
-        const headerRow = header.insertRow();
-        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        daysOfWeek.forEach(day => {
-            const cell = headerRow.insertCell();
-            cell.textContent = day;
-        });
-        const body = calendar.createTBody();
-        let date = 1;
-        for (let i = 0; i < 6; i++) {
-            const row = body.insertRow();
-            for (let j = 0; j < 7; j++) {
-                if (i === 0 && j < firstDayOfWeek) {
-                    const cell = row.insertCell();
-                    cell.textContent = '';
-                } else if (date > daysInMonth) {
-                    break;
-                } else {
-                    const cell = row.insertCell();
-                    cell.textContent = date;
-                    cell.classList.add('calendar-date');
-                    cell.dataset.date = new Date(year, month, date).toLocaleDateString('ja-JP');
-                    date++;
-                }
-            }
-        }
-        return calendar;
-    }
+    }, 1000); // 1秒ごとに更新
 });
 
-
-
-
-// >>>>>>> 08f97f0 (main)
-
-document.addEventListener('DOMContentLoaded', () => {
-    const addBtn = document.getElementById('add-item');
-    const saveBtn = document.getElementById('save-reflection')
-    // const morningRoutine = document.getElementById('morning-routine');
-    const reflection = document.getElementById('reflection');
-    
-    
-    // スコープの問題を解決する： もしmorningRoutineが特定の関数内でのみ定義されている場合は、それを関数外で定義し、必要な関数からアクセスできるようにする
-    let morningRoutine; // グローバルスコープで定義
-    function loadMorningRoutine() {
-        // 保存されたルーチンをロード
-        const items = JSON.parse(localStorage.getItem('morningRoutine')) || [];
-        items.forEach(itemText => {
-            addRoutineItem(itemText, false);
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        morningRoutine = document.getElementById('morning-routine');
-        function addRoutineItem(itemText, save = true) {
-            const li = document.createElement('li');
-            li.textContent = itemText;
-            morningRoutine.appendChild(li);
-        
-                // ローカルストレージに保存
-                if (save) {
-                    const items = JSON.parse(localStorage.getItem('morningRoutine')) || [];
-                    items.push(itemText);
-                    localStorage.setItem('morningRoutine', JSON.stringify(items));
-                }
-            }
-        
-    });
-
-// <<<<<<< HEAD
-    // 反省を保存
-    // saveBtn.addEventListener('click', () => {
-// =======
-    // 今日の行動計画を保存
-    // saveBtn.addEventListener('click', () => {
-// >>>>>>> 08f97f0 (main)
-        const today = new Date().toLocaleDateString('ja-JP'); // 日本の日付形式で取得
-        const reflectionWithDate = {
-            date: today,
-            text: reflection.value
-        };
-        localStorage.setItem('reflection', JSON.stringify(reflectionWithDate));
-        alert('保存しました');
-    });
-    
-    // jQueryを使用してページ読み込み時にアニメーションを表示
-    $("main").slideDown(500);
-    
-    // Save クリックイベント
-    $("#save").on("click", function(){
-        const v = $("#textarea").val();
-        localStorage.setItem("memo", v);
-        alert("保存しました");
-    });
-
-    // Clear クリックイベント
-    $("#clear").on("click", function(){
-        localStorage.removeItem("memo");
-        $("#textarea").val("");
-        alert("削除しました");
-    });
-
-    // ページ読み込み時に保存データを表示
-    if(localStorage.getItem("memo")){
-        const v = localStorage.getItem("memo");
-        $("#textarea").val(v);
-    }
-
-// 夜になったら「おかえり」メッセージを表示
-function showWelcomeBackMessage() {
-    const welcomeBackMessage = document.getElementById('welcome-back-message');
-    if (!welcomeBackMessage) return; // この行で要素がnullであれば、関数の残りの部分は実行されません
-    const yesButton = document.getElementById('yes-button');
-    const currentHour = new Date().getHours();
-
-    // 仮に18時以降を「夜」とします。
-    if (currentHour >= 18 && welcomeBackMessage) { // welcomeBackMessageがnullでないことを再確認
-        welcomeBackMessage.style.display = 'block';
-        yesButton.addEventListener('click', () => {
-            reflection.focus(); // テキストエリアにフォーカス
-        });
-    }
-}
-// =======
-// });
-
-function checkAndShowWelcomeBackMessage() {
-    const welcomeBackMessage = document.getElementById('welcome-back-message');
-    const yesButton = document.getElementById('yes-button');
-    const currentHour = new Date().getHours();
-
-    // ページ訪問回数をローカルストレージから取得
-    let visits = localStorage.getItem('pageVisits') || 0;
-    visits++; // 訪問回数をインクリメント
-    localStorage.setItem('pageVisits', visits); // 更新した訪問回数を保存
-
-    // 0時以降かつ訪問回数が1より大きい場合にメッセージを表示
-    if (currentHour >= 0 && visits > 1) {
-        if (welcomeBackMessage) {
-            welcomeBackMessage.style.display = 'block';
-            yesButton.addEventListener('click', () => {
-                const reflection = document.getElementById('reflection');
-                if (reflection) reflection.focus(); // テキストエリアにフォーカス
-            });
-        }
-    }
-}
-
-// ページ読み込み時に関数を実行
-document.addEventListener('DOMContentLoaded', checkAndShowWelcomeBackMessage);
-
-
-
-// >>>>>>> 08f97f0 (main)
- // 背景を朝と夜とで変える
-document.addEventListener('DOMContentLoaded', () => {
-    const body = document.body;
-    const hour = new Date().getHours();
-        
-    if (hour >= 6 && hour < 18) {
-            // 朝6時から夜18時までは朝の背景
-            body.classList.add('morning');
-    } else {
-            // 夜18時から朝6時までは夜の背景
-             body.classList.add('night');
-            }
-        });  
-
-
-// 語録の配列
+// 語録の配列を初期化
 const quotes = [
-    "すーさんの今日１日語録"+"一口サイズでいいんやで",
+    "一口サイズでいいんやで",
     "すーさんの今日１日語録"+"毎日の積み重ねやで。ほなやろか",
-    "すーさんの今日１日語録"+"継続した事だけが身につくんやで",
-    "すーさんの今日１日語録"+"あれ？そこまで進んでるん！？",
-    "すーさんの今日１日語録"+"頑張るってどういう事なんやろうね〜",
-    "すーさんの今日１日語録"+"お前さんはお前さんよ。",
-    "すーさんの今日１日語録"+"今日もいい日やったかい？一歩ずつ一歩ずつ",
-    "すーさんの今日１日語録"+"気づいたら早いでよ。選択肢は狭ければ 狭いほどいいんやで",
+    "継続した事だけが身につくんやで",
+    "あれ？そこまで進んでるん！？",
+    "頑張るってどういう事なんやろうね〜",
+    "お前さんはお前さんよ。",
+    "今日もいい日やったかい？一歩ずつ一歩ずつ",
+    "気づいたら早いでよ。選択肢は狭ければ 狭いほどいいんやで",
     "すーさんの今日１日語録"+"どう生きるかなんて、皆ちゃうからなー",
-    "すーさんの今日１日語録"+"いらん努力してないやろか？",
-    "すーさんの今日１日語録"+"おおきに！見とるからなー",
-    "すーさんの今日１日語録"+"出来ひんかった後悔せんと、明日どう動くか考えよ。",
-    // 他にも追加
+    "いらん努力してないやろか？",
+    "おおきに！見とるからなー",
+    "出来ひんかった後悔せんと、明日どう動くか考えよ。",
+    // 他の語録をここに追加
 ];
-
 // ランダムに語録を選ぶ関数
 function getRandomQuote() {
     const index = Math.floor(Math.random() * quotes.length);
     return quotes[index];
 }
-
 // 語録をポップアップ表示する関数
 function showRandomQuote() {
     const quote = getRandomQuote();
     alert(quote); // カスタムポップアップに置き換えることも可能
 }
-// <<<<<<< HEAD
+// 例として関数を実行
+showRandomQuote();
 
-// 保存ボタンクリック時のイベントハンドラを設定
-document.getElementById('save-settings').addEventListener('click', () => {
-    // ここで環境設定を保存するコードを追加することもできます
-    // 例: localStorage.setItem('setting', document.getElementById('setting-input').value);
 
-    // 語録ポップアップを表示
-    showRandomQuote();
+// 振り返り
+$(document).ready(function() {
+    showWelcomeBackMessage();
 });
-
-// タイマー
-document.addEventListener('DOMContentLoaded', function() {
-    var timeLeft = 3 * 60; // 5分を秒単位で計算
-// =======
-    // 語録ポップアップを表示
-    showRandomQuote();
-// });
-
-// タイマー
-document.addEventListener('DOMContentLoaded', function() {
-    var timeLeft = 3 * 60; // 3分を秒単位で計算
-// >>>>>>> 08f97f0 (main)
-    var timerElement = document.getElementById('timer');
-
-    var timerId = setInterval(function() {
-        var minutes = Math.floor(timeLeft / 60);
-        var seconds = timeLeft % 60;
-
-        // 分と秒が10未満の場合は、先頭に0を追加する
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-
-        // タイマーを更新
-        timerElement.textContent = `${minutes}:${seconds}`;
-
-        if (timeLeft <= 0) {
-            clearInterval(timerId);
-            alert('3分が経過しました。自分の時間を楽しんでください！');
-        } else {
-            timeLeft -= 1;
-        }
-    }, 1000); // 1秒ごとに更新
-// <<<<<<< HEAD
-});
-// =======
-});
-
-// // データを保存する関数
-// function saveDataForDate(data) {
-//     const today = new Date().toLocaleDateString('ja-JP');
-//     localStorage.setItem(today, JSON.stringify(data));
-//     alert('今日のデータを保存しました');
-// }
-
-// 特定の日付のデータを取得する関数
-function loadDataForDate(date) {
-    const data = localStorage.getItem(date);
-    if (data) {
-        return JSON.parse(data);
-    } else {
-        alert('この日のデータはありません');
-        return null;
-    }
+function showWelcomeBackMessage() {
+    
+}
+function checkAndShowWelcomeBackMessage() {
+    
 }
 
-// // 特定の日付のデータを読み込む例
-// const dateToLoad = new Date().toLocaleDateString('ja-JP');
-// const loadedData = loadDataForDate(dateToLoad);
-// console.log(loadedData);
 
 
-// ユーザーインターフェイスJavaScript (機能実装)
-document.getElementById('addRoutineBtn').addEventListener('click', function() {
-    const newRoutine = document.getElementById('newRoutineInput').value;
-    if (newRoutine) {
-        addNewRoutine(newRoutine);
-        document.getElementById('newRoutineInput').value = ''; // 入力フィールドをクリア
-    }
-});
+// 用語集
+// ボタン要素を取得
+const buttons = document.querySelectorAll('.tooltip-button');
+const tooltip = document.getElementById('tooltip');
 
-function addNewRoutine(routineName) {
-    const container = document.getElementById('routineList');
-    const routineContainer = document.createElement('div');
-    routineContainer.className = 'routine-item';
-
-    const newCheckbox = document.createElement('input');
-    newCheckbox.type = 'checkbox';
-    newCheckbox.id = routineName;
-    newCheckbox.name = 'routine';
-    newCheckbox.value = routineName;
-
-    const label = document.createElement('label');
-    label.htmlFor = routineName;
-    label.appendChild(document.createTextNode(routineName));
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = '削除';
-    deleteBtn.onclick = function() {
-        container.removeChild(routineContainer);
-    };
-
-    routineContainer.appendChild(newCheckbox);
-    routineContainer.appendChild(label);
-    routineContainer.appendChild(deleteBtn);
-    container.appendChild(routineContainer);
-}
-
-// 初期チェックリスト項目の削除機能を追加
-document.querySelectorAll('.routine-item button').forEach(button => {
-    button.addEventListener('click', function() {
-        const item = this.parentNode;
-        item.parentNode.removeChild(item);
+// ボタンごとにクリックイベントを追加
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        // ボタンのdata-term属性から単語を取得
+        const term = button.getAttribute('data-term');
+        // 単語に対応する説明を取得
+        const description = getTermDescription(term);
+        // 説明を表示
+        tooltip.textContent = description;
     });
 });
-
-// 保存または編集の処理を行う関数の実装
-let isEditMode = false; // 編集モードかどうかを判定するフラグ
-
-function saveOrEditData() {
-    if (isEditMode) {
-        // 編集モードの場合の処理
-        // ここに編集内容を保存するコードを記述
-        console.log('編集内容を保存');
-    } else {
-        // 保存モードの場合の処理
-        // ここに新規内容を保存するコードを記述
-        console.log('新規内容を保存');
+// 単語に対応する説明を取得する関数
+function getTermDescription(term) {
+    switch(term) {
+        case '環境設定':
+            return '環境設定は行動するときにできるだけ意思力を使わないで、自動的にできるような環境を作ること。「どの程度意思力を使わない方法にしたら良いのかがまだ分かってい」ないのは、まだ何もやっていないからです。概念を知れば、すぐに全てがわかるのではなく、概念を知って、概念を強化するために、具体的な事例を集めて、実際に検証し、繰り返すことで、始めて、他の事例にも応用可能になります。 スクワットは一例にすぎません。まずは「愚痴を言わない、言いそうになった」時の、代わりの行動をいくつかアイデアを書き出して、上から順に「どの程度意思力を使わない」かを検証し、自分に合ったもの（継続可能なもの）を探していくと良いです。日々の検証を楽しむことを忘れずに。'; // 環境設定に関する説明
+        case 'メタ認知':
+            return 'メタ認知は自分が認知（考えている・感じている）していることを客観的に把握すること。'; // メタ認知に関する説明
+        default:
+            return ''; // 該当する単語がない場合は空の文字列を返す
     }
-    // モードの切り替え
-    isEditMode = !isEditMode; // モードを切り替える
-}
-// 編集モードに入るトリガーとなる処理
-function enterEditMode() {
-    // 編集モードに必要なUIの変更やフラグの設定
-    isEditMode = true;
+ }
+
+
+
+// 過去のデータ
+// ページ読み込み時に保存されたデータを表示
+document.addEventListener('DOMContentLoaded', function() {
+    // リスト要素を取得
+    const dataList = document.getElementById('data-list');
+
+    // 30日前の日付を取得
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    // ローカルストレージのデータを取得し、リストアイテムとして追加
+    for (let i = 0; i < localStorage.length; i++) {
+        // ローカルストレージのキーを取得
+        const key = localStorage.key(i);
+
+        // キーが特定の形式に一致する場合のみ処理を継続
+        if (key.includes('_')) {
+            // キーから日付とセクションIDを抽出
+            const [sectionId, dateString] = key.split('_');
+
+            // 対応するセクションが存在する場合のみ処理を継続
+            if (document.getElementById(sectionId) && dateString) {
+                // データの日付をDateオブジェクトに変換
+                const date = new Date(dateString);
+
+                // 現在の日付と30日前の日付を比較し、30日以内のデータのみ表示
+                if (date >= thirtyDaysAgo) {
+                    // データを取得
+                    const data = localStorage.getItem(key);
+
+                    // リストアイテムを作成
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${dateString}: ${data}`;
+
+                    // リストに追加
+                    dataList.appendChild(listItem);
+                }
+            }
+        }
+    }
+});
+
+// マスコット
+function updateMascotState() {
+    const mascotImage = document.getElementById('mascotImage');
+    const states = ['img/1.png', 'img/2.png', 'img/3.png','img/4.png','img/5.png','img/6.png','img/7.png'];
+    let currentState = states.indexOf(mascotImage.src.split('/').pop());
+
+    currentState = (currentState + 1) % states.length;
+    mascotImage.src = states[currentState];
 }
 
+function updateProgress() {
+    progress++;
+    if (progress >= totalItems) {
+        currentStage++;
+        updateMascotState();
+        showCongratulationModal();
+    }
+}
 function updateMascotState() {
     // 進捗に応じてマスコットの状態を更新するロジックをここに実装
     // 例として、単純な状態変化を実装
@@ -562,173 +294,7 @@ function updateProgress() {
     showCongratulationModal(); // お祝いのモーダルウィンドウを表示
   }
 }
-
-// モーダルウィンドウを表示する関数
-function showCongratulationModal() {
-  document.getElementById('congratulationModal').style.display = 'block';
-}
-
-// モーダルウィンドウを閉じる関数
-document.getElementById('closeModal').addEventListener('click', function() {
-  document.getElementById('congratulationModal').style.display = 'none';
-});
-
 // マスコットの状態を更新する関数（成長段階に応じて）
 function updateMascotState() {
-  // 成長段階に応じてマスコットの画像や状態を更新するロジックをここに実装
-}
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     // 語録の配列
-//     var quotes = [
-//         "語録1",
-//         "語録2",
-//         "語録3",
-//         // 他の語録を追加
-//     ];
-
-//     // ランダムに語録を選択
-//     var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-
-// });
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    const actionButton = document.getElementById('action-btn');
-    let mode = 'edit'; // 初期モードを 'edit' に設定
-
-    actionButton.addEventListener('click', function() {
-        switch(mode) {
-            case 'edit':
-                console.log('編集モードです');
-                // ここに編集に関する処理を書く
-                mode = 'save'; // 次のモードを 'save' に変更
-                actionButton.textContent = '保存'; // ボタンのテキストを更新
-                break;
-            case 'save':
-                console.log('保存モードです');
-                // ここに保存に関する処理を書く
-                mode = 'delete'; // 次のモードを 'delete' に変更
-                actionButton.textContent = '削除'; // ボタンのテキストを更新
-                break;
-            case 'delete':
-                const confirmDelete = confirm('本当に削除しますか？');
-                if (confirmDelete) {
-                    console.log('削除処理');
-                    // ここに削除に関する処理を書く
-                }
-                mode = 'edit'; // 最初のモードに戻る
-                actionButton.textContent = '編集'; // ボタンのテキストを更新
-                break;
-            default:
-                console.log('不明なモードです');
-                break;
-        }
-    });
-});
-
-document.getElementById('loadDataButton').addEventListener('click', function() {
-    // ここでローカルストレージからデータを取得
-    var myData = localStorage.getItem('myData');
-    
-    // データが存在する場合、それを 'dataDisplay' 要素に表示
-    if (myData) {
-        document.getElementById('dataDisplay').textContent = myData;
-    } else {
-        // データが存在しない場合の処理
-        document.getElementById('dataDisplay').textContent = 'データが見つかりません。';
-    }
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const saveBtn = document.getElementById('save-reflection');
-    const reflection = document.getElementById('reflection');
-
-    // // 今日の行動計画を保存
-    // saveBtn.addEventListener('click', () => {
-    //     const today = new Date().toLocaleDateString('ja-JP');
-    //     const reflectionText = reflection.value;
-    //     saveDailyReflection(today, reflectionText); // 保存する関数を呼び出す
-    //     alert('振り返りを保存しました');
-    // });
-
-    // カレンダーで日付が選択されたときの処理
-    function onDateSelected(date) {
-        const formattedDate = date.toLocaleDateString('ja-JP');
-
-        // 日付に関連する振り返りを取得して表示
-        const reflection = localStorage.getItem('dailyReflection_' + formattedDate);
-        if (reflection) {
-            console.log('振り返り:', reflection);
-        } else {
-            console.log('その日の振り返りはありません');
-        }
-    }
-
-    // カレンダーのイベントリスナーを設定
-    const calendar = document.getElementById('calendar-container');
-    calendar.addEventListener('click', (event) => {
-        if (event.target.classList.contains('calendar-date')) {
-            const selectedDate = new Date(event.target.dataset.date);
-            onDateSelected(selectedDate);
-        }
-    });
-});
-
-// 今日の行動計画を保存する関数
-function saveDailyReflection(date, reflection) {
-    localStorage.setItem('dailyReflection_' + date, reflection);
-}
-
-// カレンダーを表示するコンテナを取得
-const calendarContainer = document.getElementById('calendar-container');
-
-// カレンダーを作成する関数
-function createCalendar(year, month) {
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const firstDayOfWeek = new Date(year, month, 1).getDay();
-    
-    const calendar = document.createElement('table');
-    calendar.className = 'calendar';
-
-    // カレンダーのヘッダーを作成
-    const header = calendar.createTHead();
-    const headerRow = header.insertRow();
-    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    daysOfWeek.forEach(day => {
-        const cell = headerRow.insertCell();
-        cell.textContent = day;
-    });
-
-    // カレンダーの日付部分を作成
-    const body = calendar.createTBody();
-    let date = 1;
-    for (let i = 0; i < 6; i++) {
-        const row = body.insertRow();
-        for (let j = 0; j < 7; j++) {
-            if (i === 0 && j < firstDayOfWeek) {
-                const cell = row.insertCell();
-                cell.textContent = '';
-            } else if (date > daysInMonth) {
-                break;
-            } else {
-                const cell = row.insertCell();
-                cell.textContent = date;
-                cell.classList.add('calendar-date'); // 日付にクラスを追加
-                cell.dataset.date = new Date(year, month, date).toLocaleDateString('ja-JP'); // 日付をデータ属性として追加
-                date++;
-            }
-        }
-    }
-
-    return calendar;
-}
-
-// 今日の日付を取得
-const today = new Date();
-const currentYear = today.getFullYear();
-const currentMonth = today.getMonth();
-
-// カレンダーを作成してコンテナに追加
-calendarContainer.appendChild(createCalendar(currentYear, currentMonth));
+    // 成長段階に応じてマスコットの画像や状態を更新するロジックをここに実装
+  }

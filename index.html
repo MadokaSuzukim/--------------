@@ -3,38 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>アウトプットメモアプリ</title>
-        <!-- /* CSS スタイルはここに追加 */ -->
-        <!-- /* CSSリンク */ -->
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .calendar {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .calendar th, .calendar td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        .calendar th {
-            background-color: #f2f2f2;
-        }
-        .calendar td:hover {
-            background-color: #f0f0f0;
-            cursor: pointer;
-        }
-    </style>
-    
+    <link rel="stylesheet" href="style.css"> <!-- /* CSSリンク */ -->
     <!-- jQueryのスクリプト -->
     <script src="js/jquery-2.1.3.min.js"></script>
 </head>
 <body>
-<!-- >>>>>>> 08f97f0 (main) -->
     <div id="app">
         <h1>毎日のアウトプットメモアプリ</h1>
-        <h2>-環境設定もできるよ-</h2>
         <h2>マイダンジョンを攻略し、生きやすさを手に入れよう！</h2>
-<!-- <<<<<<< HEAD -->
+        <h2>毎日のアウトプットで赤ちゃんが成長していくよ🎶</h2>
+
+        <!-- マスコット表示 -->
+<div id="mascot">
+    <img src="img/1.png" alt="マスコット" id="mascotImage">
+</div>
+<!-- モーダルウィンドウ -->
+<div id="congratulationModal" style="display:none;">
+    <p>おめでとう！マスコットが成長したよ！</p>
+    <button id="closeModal">閉じる</button>
+  </div>
     <link rel="stylesheet" href="style.css">
     <script src="js/jquery-2.1.3.min.js"></script>
 </head>
@@ -42,21 +29,18 @@
     <header>
         <h1></h1>
     </header>
-    <div id="timer">03:00</div>
-    <main style="display:none">
-        <div>今日の行動計画</div>
-        <textarea id="textarea"></textarea>
-        <ul>
-            <li id="save">Save</li>
-            <li id="clear">Clear</li>
-        </ul>
+    <main>
+        <h1>リラックスできてる？1分間深呼吸してみて</h1>
+        <div id="timer"></div>
+        <main id="actionPlanSection">
+            <div>行動計画を立てましょう</div>
+            <textarea id="actionPlan"></textarea>
+            <ul>
+                <li id="saveActionPlan" class="save-button">Save</li>
+                <li id="clearActionPlan" class="clear-button">Clear</li>
+            </ul>
+        </main>
     </main>
-    <div id="app">
-        
-    
-    <!-- 語録表示エリア
-<div id="quote"></div> -->
-
     <!-- 朝の習慣をチェックリスト形式で管理し、標準の習慣を予め記載しておきながら、ユーザーが自由に項目を追加できる機能を実装する -->
         <h2>成功に近づく習慣</h2>
         <div id="morning-routine">
@@ -89,52 +73,52 @@
                     <button id="addRoutineBtn">追加</button>
                 </div>
             </div>
-            <!-- JavaScriptで動的にリストを生成 -->
         </div>
     
-
         <!-- おかえりメッセージのコンテナ -->
-        <h2>今日1日の振り返り</h2>
-<div id="welcome-back-message" style="display:none;">
-    <p>おかえりなさい！今日はどんな１日だった？目的を意識して過ごせたかな？</p>
-    <button id="yes-button">はい</button>
-</div>
-        <!-- 振り返りメッセージエリアを追加 -->
-        <textarea id="reflection"></textarea>
+        <h2>振り返り</h2>
+
+        <main id="welcome-back-container">
+            <div id="welcome-back-message">
+                <p>おかえりなさい！今日はどんな１日だった？目的を意識して過ごせたかな？</p>
+                <!-- <button id="yes-button">はい</button> -->
+            </div>
+        </main>
+        <main style="display:none">
+            <div>振り返ってみましょう</div>
+            <textarea id="reflection"></textarea>
+            <ul>
+                <li id="saveReflection">Save</li>
+                <li id="clearReflection">Clear</li>
+            </ul>
+        </main>
+        
+        <!-- 環境設定フォーム -->
+        <main style="display:none">
+            <div>環境設定を考えてみましょう</div>
+            <textarea id="environment"></textarea>
+            <ul>
+                <li id="saveEnvironment">Save</li>
+                <li id="clearEnvironment">Clear</li>
+            </ul>
+        </main>
+
+        <h1>用語集</h1>
+    <h2>気になる単語をクリックしたら説明がでるよ</h2>
+    <div class="buttons-container">
+        <!-- ボタン -->
+        <button class="tooltip-button" data-term="環境設定">環境設定</button>
+        <button class="tooltip-button" data-term="メタ認知">メタ認知</button>
     </div>
-    
-<!-- 環境設定フォーム -->
-<div id="settings-form">
-    <label for="setting-input">環境設定:</label>
-    <input type="text" id="setting-input" name="setting-input">
-</div>
 
-<!-- マスコット表示 -->
-<div id="mascot">
-    <img src="img/1.png" alt="マスコット" id="mascotImage">
-</div>
+    <!-- 説明表示用のエリア -->
+    <div id="tooltip"></div>
 
-<!-- 振り返りHTML (ユーザーインターフェース) -->
-<label for="datePicker">データを見る日付を選択：</label>
-<input type="date" id="datePicker" name="datePicker">
+<h1>過去のデータ</h1>
+    <ul id="data-list">
+        <!-- データがここに表示されます -->
+    </ul>
 
-
-<button id="loadDataButton">データをロード</button>
-<div id="dataDisplay"></div>
-
-<h1>用語集</h1>
-<p>
-    <span class="tooltip">環境設定<span class="tooltiptext">環境設定はやりたい事をやれないそれをエネルギー使わずにする方法を考えること。</span></span>、
-    <span class="tooltip">メタ認知<span class="tooltiptext">自分が認知（考えている・感じている）していることを客観的に把握すること</span></span>
-  </p>
-<!-- モーダルウィンドウ -->
-<div id="congratulationModal" style="display:none;">
-    <p>おめでとう！マスコットが成長したよ！</p>
-    <button id="closeModal">閉じる</button>
-  </div>
-  <!-- カレンダーのコンテナ -->
-  <div id="calendar-container"></div>
-<!-- >>>>>>> 08f97f0 (main) -->
     <footer>
         <small>Marumark</small>
     </footer>
