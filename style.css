@@ -46,7 +46,7 @@ textarea {
 }
 /* ツールチップ */ 
 .tooltip-button {
-    background-color: goldenrod; /* ボタンの背景色 */
+    background-color: blue; /* ボタンの背景色 */
     color: white; /* ボタンの文字色 */
     border: none; /* ボタンの枠線をなくす */
     padding: 10px 20px; /* ボタンの余白 */
@@ -80,19 +80,11 @@ textarea {
     margin-top: 0; /* ビューポートの高さに基づいて、上部の余白を設定します */
 }
 
-/* マスコット指定 */
-#mascot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 /* フッター指定 */
 footer {
     text-align: center; /* 中央揃え */
-    background-color: gray; /* グレーの背景色 */
+    background-color: rgb(180, 176, 176); /* グレーの背景色 */
     padding: 20px; /* 適切な余白を追加 */
-
 
 /* ボタン */
 }
@@ -104,7 +96,7 @@ footer {
 .clear-button {
     padding: 10px 20px;
     margin: 10px;
-    background-color: #4CAF50; /* Green */
+    background-color: blue; /* Green */
     border: none;
     color: white;
     text-align: center;
@@ -116,7 +108,7 @@ footer {
 
 .save-button:hover,
 .clear-button:hover {
-    background-color: #45a049;
+    background-color: blue;
 }
 
 
@@ -140,7 +132,7 @@ footer {
 .centered-button-container button {
     padding: 10px 20px;
     margin: 10px;
-    background-color: #4CAF50; /* Green */
+    background-color: blue; 
     border: none;
     color: white;
     text-align: center;

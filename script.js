@@ -104,7 +104,7 @@
     checkAndShowWelcomeBackMessage();
     const body = document.body;
     const hour = new Date().getHours();
-    if (hour >= 6 && hour < 9) {
+    if (hour >= 6 && hour < 14) {
         body.classList.add('morning');
     } else {
         body.classList.add('night');
@@ -308,54 +308,181 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('選択した習慣を保存しました');
     }
 });
+// マスコットの現在の画像インデックス
+let currentMascotIndex = 0;
 
-// マスコット
+// マスコットの画像パスのリスト
+const mascotImages = [
+    'img/1.png',
+    'img/2.png',
+    'img/3.png',
+    'img/4.png',
+    'img/5.png',
+    'img/6.png',
+    'img/7.png'
+];
+// マスコットの状態を更新する関数
 function updateMascotState() {
+    // 現在のマスコットの画像を取得
     const mascotImage = document.getElementById('mascotImage');
-    const states = ['img/1.png', 'img/2.png', 'img/3.png','img/4.png','img/5.png','img/6.png','img/7.png'];
-    let currentState = states.indexOf(mascotImage.src.split('/').pop());
 
-    currentState = (currentState + 1) % states.length;
-    mascotImage.src = states[currentState];
-}
+    // 現在の画像インデックスがリストの範囲内にあるか確認
+    if (currentMascotIndex >= 0 && currentMascotIndex < mascotImages.length) {
+        // 画像を更新
+        mascotImage.src = mascotImages[currentMascotIndex];
+        // ローカルストレージに成長段階を保存
+        saveMascotState();
+        // 画像インデックスを次に進める
+        currentMascotIndex = (currentMascotIndex + 1) % mascotImages.length;
 
-function updateProgress() {
-    progress++;
-    if (progress >= totalItems) {
-        currentStage++;
-        updateMascotState();
-        showCongratulationModal();
+        // モーダル表示
+        showCongratulationModal(); // お祝いのモーダルウィンドウを表示
     }
 }
-function updateMascotState() {
-    // 進捗に応じてマスコットの状態を更新するロジックをここに実装
-    const mascotImage = document.getElementById('mascotImage');
-    const states = ['img/1.png', 'img/2.png', 'img/3.png','img/4.png','img/5.png','img/6.png','img/7.png'];
-    let currentState = states.indexOf(mascotImage.src.split('/').pop());
-
-    currentState = (currentState + 1) % states.length; // 次の状態へ
-    mascotImage.src = states[currentState]; // 画像を更新
-}
-
-// 全ての項目に答えるとマスコットが成長する機能と、成長段階が上がるたびにモーダルウィンドウでお祝いメッセージを表示する機能
-let progress = 0; // ユーザーの進捗状況（例：0から100までのパーセンテージ）
-const totalItems = 4; // 答えるべき項目の総数
-let currentStage = 0; // マスコットの現在の成長段階
 
 // 進捗を更新する関数（項目に答えるたびに呼び出す）
 function updateProgress() {
-  progress++; // 進捗を更新
-  if (progress >= totalItems) {
-    // 全ての項目に答えたら
-    currentStage++; // マスコットの成長段階を上げる
-    updateMascotState(); // マスコットの状態を更新
-    showCongratulationModal(); // お祝いのモーダルウィンドウを表示
-  }
+    progress++; // 進捗を更新
+    if (progress >= totalItems) {
+        // 全ての項目に答えたら
+        currentMascotIndex++; // マスコットの成長段階を上げる
+        updateMascotState(); // マスコットの状態を更新
+        showCongratulationModal(); // お祝いのモーダルウィンドウを表示
+    }
 }
-// マスコットの状態を更新する関数（成長段階に応じて）
-function updateMascotState() {
-    // 成長段階に応じてマスコットの画像や状態を更新するロジックをここに実装
-  }
+
+// // マスコットの状態を更新する関数（成長段階に応じて）
+// function updateMascotState() {
+//     // 成長段階に応じてマスコットの画像や状態を更新するロジックをここに実装
+// }
+
+// // マスコットの状態を更新する関数
+// function updateMascotState() {
+//     // 現在のマスコットの画像を取得
+//     const mascotImage = document.getElementById('mascotImage');
+
+//     // 現在の画像インデックスがリストの範囲内にあるか確認
+//     if (currentMascotIndex >= 0 && currentMascotIndex < mascotImages.length) {
+//         // 画像を更新
+//         mascotImage.src = mascotImages[currentMascotIndex];
+//         // 画像インデックスを次に進める
+//         currentMascotIndex = (currentMascotIndex + 1) % mascotImages.length;
+
+//         // モーダル表示
+//         showCongratulationModal(); // お祝いのモーダルウィンドウを表示
+//     }
+// }
+
+// 入力があった場合に呼び出される関数
+function onInput() {
+    const currentDate = new Date().toLocaleDateString(); // 現在の日付を取得
+
+// 最後の入力日付が本日ではない場合、つまり今日初めての入力の場合
+    if (lastInputDate !== currentDate) {
+        lastInputDate = currentDate; // 最後の入力日付を更新
+        currentStage++; // マスコットの成長段階を上げる
+        updateMascotState(); // マスコットの状態を更新
+        showCongratulationModal(); // お祝いのモーダルウィンドウを表示
+    }
+}
+// お祝いモーダル表示
+function showCongratulationModal() {
+    const modal = document.createElement('div');
+    modal.innerHTML = `
+        <div>Congratulations! </div>
+        <div>おめでとう! あなたのマスコットが成長したよ!</div>
+        <button id="closeModalButton">閉じる</button>
+    `;
+    modal.style.position = 'fixed';
+    modal.style.top = '50%';
+    modal.style.left = '50%';
+    modal.style.transform = 'translate(-50%, -50%)';
+    modal.style.backgroundColor = 'white';
+    modal.style.padding = '20px';
+    modal.style.border = '1px solid black';
+    document.body.appendChild(modal);
+// モーダルが表示されたら、ローカルストレージに表示状態を保存
+localStorage.setItem('modalState', true);
+
+// 閉じるボタンにクリックイベントリスナーを追加
+const closeModalButton = document.getElementById('closeModalButton');
+closeModalButton.addEventListener('click', function() {
+    // モーダルを非表示にする
+    modal.style.display = 'none';
+    // モーダルの表示状態をリセットする
+    resetModalState();
+});
+}
+
+
+// モーダルの非表示状態をリセットする関数
+function resetModalState() {
+localStorage.removeItem('modalState');
+}
+
+// 保存ボタンにクリックイベントリスナーを追加
+document.getElementById("saveEnvironment").addEventListener("click", function() {
+// テキストエリアから環境設定を取得
+    const environmentText = document.getElementById("environment").value;
+
+// マスコットの成長状態を更新する関数を呼び出す
+    updateMascotByEnvironment(environmentText);
+});
+// マスコットの成長状態を更新する関数
+function updateMascotByEnvironment(environmentText) {
+    // environmentTextに基づいてマスコットの成長状態を更新するロジックを実装
+    // ここでは仮にマスコットの成長段階を進める関数updateMascotState()を呼び出すものとします
+    updateMascotState();
+
+    // 成長後のモーダルを表示する
+    showCongratulationModal();
+}
+
+// マスコットの成長状態を更新する関数
+function updateMascotByEnvironment(environmentText) {
+    // environmentTextに基づいてマスコットの成長状態を更新するロジックを実装
+    // ここでは仮にマスコットの成長段階を進める関数updateMascotState()を呼び出すものとします
+    updateMascotState();
+}
+// 保存ボタンにクリックイベントリスナーを追加
+document.getElementById("saveEnvironment").addEventListener("click", function() {
+    // テキストエリアから環境設定を取得
+    const environmentText = document.getElementById("environment").value;
+
+    // マスコットの成長状態を更新する関数を呼び出す
+    updateMascotByEnvironment(environmentText);
+});
+// マスコットの成長段階を保存するキー
+const mascotStateKey = 'mascotState';
+
+// ローカルストレージから成長段階を取得する関数
+function getMascotState() {
+    return localStorage.getItem(mascotStateKey);
+}
+
+// ローカルストレージに成長段階を保存する関数
+function setMascotState(state) {
+    localStorage.setItem(mascotStateKey, state);
+}
+
+// ページ読み込み時に成長段階を復元する関数
+function restoreMascotState() {
+    const savedState = getMascotState();
+    if (savedState !== null) {
+        // ローカルストレージから成長段階を取得して、マスコットの状態を更新する
+        currentMascotIndex = parseInt(savedState);
+        updateMascotState();
+    }
+}
+
+// マスコットの成長段階を保存する関数
+function saveMascotState() {
+    // マスコットの現在の成長段階を保存
+    setMascotState(currentMascotIndex.toString());
+}
+
+// ページ読み込み時に成長段階を復元
+restoreMascotState();
 
 // 語録の配列を初期化
 const quotes = [
@@ -373,79 +500,67 @@ const quotes = [
     "出来ひんかった後悔せんと、明日どう動くか考えよ。",
     // 他の語録をここに追加
 ];
+
 // ランダムに語録を選ぶ関数
 function getRandomQuote() {
     const index = Math.floor(Math.random() * quotes.length);
     return quotes[index];
 }
+
 // 語録をポップアップ表示する関数
 function showRandomQuote() {
     const quote = getRandomQuote();
-    alert(quote); // カスタムポップアップに置き換えることも可能
+    
+    // カスタムポップアップの作成
+    const popup = document.createElement('div');
+    popup.innerHTML = `
+        <div>${quote}</div>
+        <button id="okButton">OK</button>
+    `;
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.backgroundColor = 'gray';
+    popup.style.padding = '50px';
+    popup.style.border = '1px solid black';
+    document.body.appendChild(popup);
+
+    // OKボタンをクリックしたときのイベントリスナー
+    const okButton = document.getElementById("okButton");
+    okButton.addEventListener("click", function okButtonClicked() {
+        // 音楽再生
+        playBackgroundMusicOnClick();
+        // ポップアップの削除
+        document.body.removeChild(popup);
+        // OKボタンのクリックイベントを削除
+        okButton.removeEventListener("click", okButtonClicked);
+    });
 }
+
 // 例として関数を実行
 showRandomQuote();
-document.getElementById("showQuoteButton").addEventListener("click", showRandomQuote);
 
-// ポップアップを表示する関数
-function showRandomQuote() {
-    const quote = getRandomQuote();
-    alert(quote); // カスタムポップアップに置き換えることも可能
-
-    // OKボタンをクリックしたときに音声を再生
-    document.getElementById("backgroundMusic").play().catch(error => console.error("バックグラウンドミュージックの再生に失敗しました:", error));
-}
-
-// showQuoteButton要素が存在するかを確認してからイベントリスナーを追加
-const showQuoteButton = document.getElementById("showQuoteButton");
-if (showQuoteButton) {
-    showQuoteButton.addEventListener("click", showRandomQuote);
-} else {
-    console.error("showQuoteButtonが存在しません");
-}
-
-// バックグラウンドミュージックを再生する関数
-function playBackgroundMusic() {
+// ボタンをクリックしたときに音声を再生する関数
+function playBackgroundMusicOnClick() {
     var backgroundMusic = document.getElementById("backgroundMusic");
-    backgroundMusic.play().catch(error => console.error("バックグラウンドミュージックの再生に失敗しました:", error));
-}
-// ユーザーのクリックに応答して音声を再生する関数
-function playBackgroundMusicOnClick() {
-    playBackgroundMusic();
+    backgroundMusic.play().catch(error => {
+        // ユーザーの対話なしに再生しようとした場合のエラー処理
+        console.error("バックグラウンドミュージックの再生に失敗しました:", error);
+    });
 }
 
 // ボタンにクリックイベントを追加して音声を再生する
-document.getElementById("playMusicButton").addEventListener("click", playBackgroundMusicOnClick);
-// ユーザーのクリックに応答して音声を再生するための関数
-function playBackgroundMusicOnClick() {
-    playBackgroundMusic();
-}
-// ボタンにクリックイベントを追加して音声を再生する
-document.getElementById("playMusicButton").addEventListener("click", playBackgroundMusicOnClick);
+document.getElementById("okButton").addEventListener("click", playBackgroundMusicOnClick);
+
 // ミュート切り替えの関数
 function toggleMute() {
     var backgroundMusic = document.getElementById("backgroundMusic");
     backgroundMusic.muted = !backgroundMusic.muted;
     var muteButton = document.getElementById("muteButton");
-    muteButton.textContent = backgroundMusic.muted ? "音を出す" : "音を消す";
+    if (muteButton) { // muteButtonがnullでないことを確認する
+        muteButton.textContent = backgroundMusic.muted ? "音を出す" : "音を消す";
+    } else {
+        console.error("muteButtonが見つかりません。");
+    }
 }
-
-function playBackgroundMusic() {
-    var backgroundMusic = document.getElementById("backgroundMusic");
-    backgroundMusic.play().catch(error => console.error("バックグラウンドミュージックの再生に失敗しました:", error));
-}
-
-function playBackgroundMusicOnClick() {
-    playBackgroundMusic();
-}
-
-document.getElementById("musicButton").addEventListener("click", playBackgroundMusicOnClick);
-
-// ボタンをクリックしたときに音声を再生する関数
-function playBackgroundMusicOnClick() {
-    var backgroundMusic = document.getElementById("backgroundMusic");
-    backgroundMusic.play().catch(error => console.error("バックグラウンドミュージックの再生に失敗しました:", error));
-}
-
-// ボタンにクリックイベントを追加して音声を再生する
-document.getElementById("musicButton").addEventListener("click", playBackgroundMusicOnClick);
