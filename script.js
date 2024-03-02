@@ -423,5 +423,5 @@ function toggleMute() {
     var backgroundMusic = document.getElementById("backgroundMusic");
     backgroundMusic.muted = !backgroundMusic.muted;
     var muteButton = document.getElementById("muteButton");
-    muteButton.textContent = backgroundMusic.muted ? "音を出す" : "音を消す";
+    muteButton.textContent = backgroundMusic.muted ? "音を消す" : "音を出す";
 }

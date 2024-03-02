@@ -131,3 +131,22 @@ footer {
     border: 2px solid black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
+
+
+  
+  .centered-button-container {
+    text-align: center;
+}
+
+.centered-button-container button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block; /* 横並びにする */
+    font-size: 16px;
+    cursor: pointer;
+}
