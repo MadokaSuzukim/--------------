@@ -34,11 +34,11 @@
         <div id="timer"></div>
         <main id="actionPlanSection">
             <div>行動計画を立てましょう</div>
-            <textarea id="actionPlan"></textarea>
-            <ul>
-                <li id="saveActionPlan" class="save-button">Save</li>
-                <li id="clearActionPlan" class="clear-button">Clear</li>
-            </ul>
+<textarea id="actionPlan"></textarea>
+<div class="button-container">
+    <button id="saveActionPlan" class="save-button">保存する</button>
+    <button id="clearActionPlan" class="clear-button">削除する</button>
+</div>
         </main>
     </main>
     <!-- 朝の習慣をチェックリスト形式で管理し、標準の習慣を予め記載しておきながら、ユーザーが自由に項目を追加できる機能を実装する -->
@@ -68,9 +68,11 @@
                           <div class="checkbox-container">
                         <input type="checkbox" id="habitRecognition" name="routine" value="成功を遠ざける習慣を認識する">
                         <label for="habitRecognition">成功に遠ざける習慣を認識する</label>
+
                     </div>
                     <input type="text" id="newRoutineInput" placeholder="新しい習慣を追加">
-                    <button id="addRoutineBtn">追加</button>
+    <button id="addRoutineBtn">追加</button>
+    <button id="saveRoutineBtn">保存</button> <!-- 保存ボタンを追加 -->
                 </div>
             </div>
         </div>
@@ -87,20 +89,24 @@
         <main style="display:none">
             <div>振り返ってみましょう</div>
             <textarea id="reflection"></textarea>
-            <ul>
-                <li id="saveReflection">Save</li>
-                <li id="clearReflection">Clear</li>
-            </ul>
+            <div class="button-container">
+                <ul>
+                    <li id="saveReflection" class="save-button">保存する</li>
+                    <li id="clearReflection" class="clear-button">削除する</li>
+                </ul>
+            </div>
         </main>
         
         <!-- 環境設定フォーム -->
         <main style="display:none">
             <div>環境設定を考えてみましょう</div>
             <textarea id="environment"></textarea>
-            <ul>
-                <li id="saveEnvironment">Save</li>
-                <li id="clearEnvironment">Clear</li>
-            </ul>
+            <div class="button-container">
+                <ul>
+                    <li id="saveEnvironment" class="save-button">保存する</li>
+                    <li id="clearEnvironment" class="clear-button">削除する</li>
+                </ul>
+            </div>
         </main>
 
         <h1>用語集</h1>

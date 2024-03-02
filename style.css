@@ -87,6 +87,32 @@ textarea {
 /* フッター指定 */
 footer {
     text-align: center; /* 中央揃え */
-    background-color: #f2f2f2; /* グレーの背景色 */
+    background-color: gray; /* グレーの背景色 */
     padding: 20px; /* 適切な余白を追加 */
+
+
+/* ボタン */
 }
+.button-container {
+    text-align: center;
+}
+
+.save-button,
+.clear-button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block; /* 横並びにする */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.save-button:hover,
+.clear-button:hover {
+    background-color: #45a049;
+}
+

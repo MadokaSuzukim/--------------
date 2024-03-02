@@ -298,3 +298,93 @@ function updateProgress() {
 function updateMascotState() {
     // 成長段階に応じてマスコットの画像や状態を更新するロジックをここに実装
   }
+
+
+// チェックリスト
+document.addEventListener('DOMContentLoaded', function() {
+    // 追加ボタン要素を取得
+    const addRoutineBtn = document.getElementById('addRoutineBtn');
+    // 削除ボタン要素を取得
+    const deleteRoutineBtn = document.getElementById('deleteRoutineBtn');
+    // 保存ボタン要素を取得
+    const saveRoutineBtn = document.getElementById('saveRoutineBtn');
+
+    // 追加ボタンがクリックされたときの処理を追加
+    addRoutineBtn.addEventListener('click', function() {
+        addNewRoutine();
+    });
+
+    // 保存ボタンがクリックされたときの処理を追加
+    saveRoutineBtn.addEventListener('click', function() {
+        saveSelectedRoutine();
+    });
+
+    // 新しい習慣を追加する関数
+    function addNewRoutine() {
+        // 入力された新しい習慣を取得
+        const newRoutine = document.getElementById('newRoutineInput').value.trim();
+        if (newRoutine === '') {
+            alert('新しい習慣を入力してください');
+            return;
+        }
+        // 新しい習慣をリストに追加
+        addRoutineToList(newRoutine);
+        // 新しい習慣をローカルストレージに保存
+        saveRoutineToLocalStorage(newRoutine);
+        // 入力欄をクリア
+        document.getElementById('newRoutineInput').value = '';
+    }
+
+    // 新しい習慣をリストに追加する関数
+    function addRoutineToList(routine) {
+        // リストコンテナ要素を取得
+        const checkboxContainer = document.getElementById('checkboxContainer');
+
+        // 新しい習慣のHTML要素を作成
+        const newRoutineCheckbox = document.createElement('div');
+        newRoutineCheckbox.classList.add('checkbox-container');
+
+        // チェックボックス要素を作成
+        const newCheckbox = document.createElement('input');
+        newCheckbox.type = 'checkbox';
+        newCheckbox.name = 'routine';
+        newCheckbox.value = routine;
+
+        // ラベル要素を作成
+        const newLabel = document.createElement('label');
+        newLabel.htmlFor = routine;
+        newLabel.textContent = routine;
+
+        // チェックボックスとラベルを新しい習慣のHTML要素に追加
+        newRoutineCheckbox.appendChild(newCheckbox);
+        newRoutineCheckbox.appendChild(newLabel);
+
+        // 新しい習慣のHTML要素をリストの最初に追加
+        checkboxContainer.insertBefore(newRoutineCheckbox, checkboxContainer.firstChild);
+    }
+
+    // 新しい習慣をローカルストレージに保存する関数
+    function saveRoutineToLocalStorage(routine) {
+        // ローカルストレージから現在の習慣リストを取得
+        const savedRoutines = JSON.parse(localStorage.getItem('routines')) || [];
+
+        // 新しい習慣をリストに追加
+        savedRoutines.unshift(routine); // 新しい習慣を配列の最初に追加
+
+        // 更新された習慣リストをローカルストレージに保存
+        localStorage.setItem('routines', JSON.stringify(savedRoutines));
+
+        // ユーザーに通知
+        alert('新しい習慣を追加しました');
+    }
+
+    // 保存ボタンがクリックされたときの処理を追加
+    function saveSelectedRoutine() {
+        const checkboxes = document.querySelectorAll('input[name="routine"]:checked');
+        const selectedRoutines = Array.from(checkboxes).map(checkbox => checkbox.value);
+
+        localStorage.setItem('selectedRoutines', JSON.stringify(selectedRoutines));
+
+        alert('選択した習慣を保存しました');
+    }
+});
