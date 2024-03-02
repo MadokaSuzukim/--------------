@@ -24,12 +24,20 @@
         <h1></h1>
     </header>
     <main>
-         <!-- mute切り替えボタン -->
-        <h1>リラックスできてる？1分間深呼吸してみて</h1>
         <div class="centered-button-container">
             <button id="muteButton" onclick="toggleMute()">音を消す / 音を出す</button>
         </div>
-        
+         <!-- mute切り替えボタン -->
+         <div class="character-container">
+            <div class="character">
+              <!-- ここにキャラクターの画像を挿入 -->
+              <img src="character-image.png" alt="キャラクター">
+            </div>
+            <div class="speech-bubble">
+              <p>リラックスできてる？</p>
+              <p>1分間深呼吸してみて。</p>
+            </div>
+          </div>
         <div id="popup" style="display: none;">
             <p id="quoteText"></p>
             <button id="closePopupButton" onclick="closePopup()">閉じる</button>
@@ -119,6 +127,10 @@
         <!-- ボタン -->
         <button class="tooltip-button" data-term="環境設定">環境設定</button>
         <button class="tooltip-button" data-term="メタ認知">メタ認知</button>
+        <button class="tooltip-button" data-term="情報空間">情報空間</button>
+        <button class="tooltip-button" data-term="スコトーマ">スコトーマ</button>
+        <button class="tooltip-button" data-term="リラックス">リラックスr</button>
+        <button class="tooltip-button" data-term="意志力">意志力</button>
     </div>
 
     <!-- 説明表示用のエリア -->

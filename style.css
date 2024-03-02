@@ -12,6 +12,10 @@ h2 {
     text-align: center;
 }
 
+div {
+    text-align: center;
+}
+
 #welcome-back-container {
     display: none;
 }
@@ -141,3 +145,45 @@ footer {
     font-size: 16px;
     cursor: pointer;
 }
+/* 吹き出し */
+.character-container {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .character {
+    /* キャラクターのスタイル設定 */
+    margin-right: 20px; /* 吹き出しとの間隔 */
+  }
+  
+  .speech-bubble {
+    position: relative;
+    background: #f0f0f0;
+    border-radius: .4em;
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+    margin-bottom: 50px; /* キャラクターの足元に吹き出しを配置 */
+  }
+  
+  .speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%; /* 吹き出しの先端の位置を調整 */
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #f0f0f0;
+    border-bottom: 0;
+    margin-left: -10px;
+    margin-bottom: -20px;
+    transform: rotate(45deg); /* 吹き出しの尾の向きを調整 */
+  }
+
+  .character-image {
+    width: 10px; /* 画像の幅を100ピクセルに設定 */
+    height: auto; /* 高さを自動調整してアスペクト比を維持 */
+  }
+
+  
