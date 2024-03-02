@@ -416,12 +416,36 @@ function playBackgroundMusicOnClick() {
 
 // ボタンにクリックイベントを追加して音声を再生する
 document.getElementById("playMusicButton").addEventListener("click", playBackgroundMusicOnClick);
-
-
+// ユーザーのクリックに応答して音声を再生するための関数
+function playBackgroundMusicOnClick() {
+    playBackgroundMusic();
+}
+// ボタンにクリックイベントを追加して音声を再生する
+document.getElementById("playMusicButton").addEventListener("click", playBackgroundMusicOnClick);
 // ミュート切り替えの関数
 function toggleMute() {
     var backgroundMusic = document.getElementById("backgroundMusic");
     backgroundMusic.muted = !backgroundMusic.muted;
     var muteButton = document.getElementById("muteButton");
-    muteButton.textContent = backgroundMusic.muted ? "音を消す" : "音を出す";
+    muteButton.textContent = backgroundMusic.muted ? "音を出す" : "音を消す";
 }
+
+function playBackgroundMusic() {
+    var backgroundMusic = document.getElementById("backgroundMusic");
+    backgroundMusic.play().catch(error => console.error("バックグラウンドミュージックの再生に失敗しました:", error));
+}
+
+function playBackgroundMusicOnClick() {
+    playBackgroundMusic();
+}
+
+document.getElementById("musicButton").addEventListener("click", playBackgroundMusicOnClick);
+
+// ボタンをクリックしたときに音声を再生する関数
+function playBackgroundMusicOnClick() {
+    var backgroundMusic = document.getElementById("backgroundMusic");
+    backgroundMusic.play().catch(error => console.error("バックグラウンドミュージックの再生に失敗しました:", error));
+}
+
+// ボタンにクリックイベントを追加して音声を再生する
+document.getElementById("musicButton").addEventListener("click", playBackgroundMusicOnClick);
