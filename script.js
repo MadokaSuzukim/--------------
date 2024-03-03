@@ -104,7 +104,7 @@
     checkAndShowWelcomeBackMessage();
     const body = document.body;
     const hour = new Date().getHours();
-    if (hour >= 6 && hour < 14) {
+    if (hour >= 6 && hour < 15) {
         body.classList.add('morning');
     } else {
         body.classList.add('night');
@@ -351,28 +351,6 @@ function updateProgress() {
     }
 }
 
-// // マスコットの状態を更新する関数（成長段階に応じて）
-// function updateMascotState() {
-//     // 成長段階に応じてマスコットの画像や状態を更新するロジックをここに実装
-// }
-
-// // マスコットの状態を更新する関数
-// function updateMascotState() {
-//     // 現在のマスコットの画像を取得
-//     const mascotImage = document.getElementById('mascotImage');
-
-//     // 現在の画像インデックスがリストの範囲内にあるか確認
-//     if (currentMascotIndex >= 0 && currentMascotIndex < mascotImages.length) {
-//         // 画像を更新
-//         mascotImage.src = mascotImages[currentMascotIndex];
-//         // 画像インデックスを次に進める
-//         currentMascotIndex = (currentMascotIndex + 1) % mascotImages.length;
-
-//         // モーダル表示
-//         showCongratulationModal(); // お祝いのモーダルウィンドウを表示
-//     }
-// }
-
 // 入力があった場合に呼び出される関数
 function onInput() {
     const currentDate = new Date().toLocaleDateString(); // 現在の日付を取得
@@ -393,6 +371,7 @@ function showCongratulationModal() {
         <div>おめでとう! あなたのマスコットが成長したよ!</div>
         <button id="closeModalButton">閉じる</button>
     `;
+    
     modal.style.position = 'fixed';
     modal.style.top = '50%';
     modal.style.left = '50%';
