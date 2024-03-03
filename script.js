@@ -99,16 +99,14 @@
         });
     });
 
-    
     // 背景画像の編集
     checkAndShowWelcomeBackMessage();
     const body = document.body;
     const hour = new Date().getHours();
-    if (hour >= 6 && hour < 15) {
+    if (hour >= 6 && hour < 18) {
         body.classList.add('morning');
     } else {
-        body.classList.add('night');
-        
+        body.classList.add('night'); 
     }
 
     // タイマー
@@ -139,14 +137,10 @@
 $(document).ready(function() {
     showWelcomeBackMessage();
 });
-function showWelcomeBackMessage() {
-    
+function showWelcomeBackMessage() { 
 }
-function checkAndShowWelcomeBackMessage() {
-    
+function checkAndShowWelcomeBackMessage() {  
 }
-
-
 
 // 用語集
 // ボタン要素を取得
@@ -175,8 +169,6 @@ function getTermDescription(term) {
             return ''; // 該当する単語がない場合は空の文字列を返す
     }
  }
-
-
 
 // 過去のデータ
 // ページ読み込み時に保存されたデータを表示
@@ -339,7 +331,6 @@ function updateMascotState() {
         showCongratulationModal(); // お祝いのモーダルウィンドウを表示
     }
 }
-
 // 進捗を更新する関数（項目に答えるたびに呼び出す）
 function updateProgress() {
     progress++; // 進捗を更新
@@ -380,33 +371,31 @@ function showCongratulationModal() {
     modal.style.padding = '20px';
     modal.style.border = '1px solid black';
     document.body.appendChild(modal);
-// モーダルが表示されたら、ローカルストレージに表示状態を保存
-localStorage.setItem('modalState', true);
 
-// 閉じるボタンにクリックイベントリスナーを追加
-const closeModalButton = document.getElementById('closeModalButton');
-closeModalButton.addEventListener('click', function() {
-    // モーダルを非表示にする
-    modal.style.display = 'none';
-    // モーダルの表示状態をリセットする
-    resetModalState();
-});
+    // 閉じるボタンにクリックイベントリスナーを追加
+    const closeModalButton = modal.querySelector('#closeModalButton');
+    closeModalButton.addEventListener('click', function() {
+        // モーダルを非表示にする
+        modal.style.display = 'none';
+        // モーダルの表示状態をリセットする
+        resetModalState();
+    });
 }
-
 
 // モーダルの非表示状態をリセットする関数
 function resetModalState() {
-localStorage.removeItem('modalState');
+    localStorage.removeItem('modalState');
 }
 
 // 保存ボタンにクリックイベントリスナーを追加
 document.getElementById("saveEnvironment").addEventListener("click", function() {
-// テキストエリアから環境設定を取得
+    // テキストエリアから環境設定を取得
     const environmentText = document.getElementById("environment").value;
 
-// マスコットの成長状態を更新する関数を呼び出す
+    // マスコットの成長状態を更新する関数を呼び出す
     updateMascotByEnvironment(environmentText);
 });
+
 // マスコットの成長状態を更新する関数
 function updateMascotByEnvironment(environmentText) {
     // environmentTextに基づいてマスコットの成長状態を更新するロジックを実装
@@ -466,6 +455,7 @@ restoreMascotState();
 // 語録の配列を初期化
 const quotes = [
     "一口サイズでいいんやで",
+    "それって恐怖から？愛から？",
     "すーさんの今日１日語録"+"毎日の積み重ねやで。ほなやろか",
     "継続した事だけが身につくんやで",
     "あれ？そこまで進んでるん！？",
